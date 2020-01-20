@@ -71,6 +71,10 @@ abstract class AbstractPipes implements PipesInterface
      */
     protected function unblock()
     {
+
+	if (PHP_OS === "HP-UX") {
+		return;
+	}
         if (!$this->blocked) {
             return;
         }

@@ -71,10 +71,12 @@ abstract class AbstractPipes implements PipesInterface
      */
     protected function unblock()
     {
-
+        // hack for HP UX which seems to not like non-blocking pipes
+        // resulting in SIGPIPEs (https://github.com/symfony/symfony/issues/35366)
 	if (PHP_OS === "HP-UX") {
 		return;
 	}
+
         if (!$this->blocked) {
             return;
         }
